@@ -74,7 +74,7 @@ class _OrderScreenState extends State<OrderScreen> {
                       _quantity < widget.maxQuantity ? _increaseQuantity : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: _quantity < widget.maxQuantity
-                        ? Colors.red
+                        ? Colors.blueAccent
                         : Colors.grey,
                     foregroundColor: Colors.white,
                   ),
@@ -83,7 +83,8 @@ class _OrderScreenState extends State<OrderScreen> {
                 ElevatedButton(
                   onPressed: _quantity > 0 ? _decreaseQuantity : null,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: _quantity > 0 ? Colors.red : Colors.grey,
+                    backgroundColor:
+                        _quantity > 0 ? Colors.blueAccent : Colors.grey,
                     foregroundColor: Colors.white,
                   ),
                   child: const Text('Remove'),
