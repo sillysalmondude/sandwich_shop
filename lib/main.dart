@@ -69,25 +69,16 @@ class _OrderScreenState extends State<OrderScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
+                StyledElevatedButton(
                   onPressed:
                       _quantity < widget.maxQuantity ? _increaseQuantity : null,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: _quantity < widget.maxQuantity
-                        ? Colors.blueAccent
-                        : Colors.grey,
-                    foregroundColor: Colors.white,
-                  ),
-                  child: const Text('Add'),
+                  isEnabled: _quantity < widget.maxQuantity,
+                  label: 'Add',
                 ),
-                ElevatedButton(
+                StyledElevatedButton(
                   onPressed: _quantity > 0 ? _decreaseQuantity : null,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        _quantity > 0 ? Colors.blueAccent : Colors.grey,
-                    foregroundColor: Colors.white,
-                  ),
-                  child: const Text('Remove'),
+                  isEnabled: _quantity > 0,
+                  label: 'Remove',
                 ),
               ],
             ),
@@ -108,5 +99,30 @@ class OrderItemDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text('$quantity $itemType sandwich(es): ${'🥪' * quantity}');
+  }
+}
+
+class StyledElevatedButton extends StatelessWidget {
+  final VoidCallback? onPressed;
+  final bool isEnabled;
+  final String label;
+
+  const StyledElevatedButton({
+    super.key,
+    required this.onPressed,
+    required this.isEnabled,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isEnabled ? Colors.blueAccent : Colors.grey,
+        foregroundColor: Colors.white,
+      ),
+      child: Text(label),
+    );
   }
 }
