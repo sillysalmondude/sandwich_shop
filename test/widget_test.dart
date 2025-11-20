@@ -8,23 +8,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:sandwhich_shop/main.dart';
+import 'package:sandwich_shop/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Sandwich order quantity increments and decrements',
+      (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(const App());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify that our sandwich counter starts at 0.
+    expect(find.textContaining('0'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    // Tap the 'Add' button and trigger a frame.
+    await tester.tap(find.text('Add'));
     await tester.pump();
 
     // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.textContaining('1'), findsOneWidget);
+
+    // Tap the 'Remove' button and trigger a frame.
+    await tester.tap(find.text('Remove'));
+    await tester.pump();
+
+    // Verify that our counter has decremented back to 0.
+    expect(find.textContaining('0'), findsOneWidget);
   });
 }
